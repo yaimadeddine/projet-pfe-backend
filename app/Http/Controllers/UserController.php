@@ -109,17 +109,18 @@ class UserController extends Controller
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
                 'message' => 'wrong email or password'
-            ], 401);
+            ], 402);
         }
 
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
+            'status' => 201,
             'user' => $user,
             'token' => $token
         ];
 
-        return response()->json($response, 201);
+        return response()->json($response);
     }
 
 
@@ -133,5 +134,30 @@ class UserController extends Controller
             'message' => 'logged out'
         ];
         return response()->json(['message' => 'logged out']);
+    }
+
+
+
+    //delete
+
+    public function delete($id)
+    {
+        User::destroy($id);
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Service deleted succesfully',
+        ]);
+    }
+
+
+    //find by id
+
+
+    public function findById($id)
+    {
+        $user = User::find($id);
+
+        return response()->json($user);
     }
 }

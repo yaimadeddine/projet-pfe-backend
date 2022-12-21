@@ -12,6 +12,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\TypeFournitureController;
 use App\Http\Controllers\UserController;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -88,6 +89,7 @@ Route::post('/update/materiel/{id}', [MaterielController::class, 'update']);
 Route::post('/update/contrat/{id}', [ContratController::class, 'update']);
 Route::post('/update/fourniture/{id}', [FournitureController::class, 'update']);
 Route::post('/update/typefourniture/{id}', [TypeFournitureController::class, 'update']);
+Route::post('/update/ticket/{id}', [Ticket::class, 'update']);
 
 
 
@@ -104,6 +106,7 @@ Route::delete('/delete/materiel/{id}',[MaterielController::class, 'delete']);
 Route::delete('/delete/contrat/{id}',[ContratController::class, 'delete']);
 Route::delete('/delete/fourniture/{id}',[FournitureController::class, 'delete']);
 Route::delete('/delete/typefourniture/{id}',[TypeFournitureController::class, 'delete']);
+Route::delete('/delete/user/{id}',[UserController::class, 'delete']);
 
 
 
@@ -136,6 +139,12 @@ Route::post('/login', [UserController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [UserController::class, 'logout']);
 });
+
+
+
+// find By Id
+
+Route::get('/find/user/{id}',[UserController::class, 'findById']);
 
 
 

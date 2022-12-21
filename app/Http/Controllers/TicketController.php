@@ -24,6 +24,16 @@ class TicketController extends Controller
             'message' => 'ticket créé avec succès',
         ]);
     }
+    public function update(Request $request, $id)
+{
+    $ticket =Ticket::find($id);
+    $ticket->status = $request->input('status');
+    $ticket->save();
+    return response()->json([
+        'status' => 200,
+        'message' => 'updated succesfully',
+    ]);
+}
 
     public function findAll(Request $request)
     {
